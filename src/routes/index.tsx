@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { MissionSection } from "@/components/sections/MissionSection";
+import { PersonaSection } from "@/components/sections/PersonaSection";
+import { FeaturesSection } from "@/components/sections/FeaturesSection";
+import { ExplorerSection } from "@/components/sections/ExplorerSection";
+import { ExampleSection } from "@/components/sections/ExampleSection";
+import { FaqSection } from "@/components/sections/FaqSection";
+import { ClosingSection } from "@/components/sections/ClosingSection";
+import { Footer } from "@/components/sections/Footer";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "NalarRuang, Cari Hunian Sesuai Gaya Hidup di Jabodetabek" },
+      { name: "description", content: "Temukan hunian ideal di Jabodetabek melalui data spasial, persona gaya hidup, rekomendasi kawasan, dan simulasi perjalanan." },
+      { property: "og:title", content: "NalarRuang, Cari Hunian Sesuai Gaya Hidup di Jabodetabek" },
+      { property: "og:description", content: "Baca kota melalui data publik dan temukan kawasan hunian yang sesuai dengan cara hidupmu." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useScrollReveal();
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main>
+      <Navbar />
+      <Hero />
+      <MissionSection />
+      <PersonaSection />
+      <FeaturesSection />
+      <ExplorerSection />
+      <ExampleSection />
+      <FaqSection />
+      <ClosingSection />
+      <Footer />
+    </main>
   );
 }
